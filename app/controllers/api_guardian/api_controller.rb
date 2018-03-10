@@ -17,11 +17,27 @@ module ApiGuardian
 
     attr_reader :current_user
 
-    def index
-      @resources = should_paginate? ? resource_store.paginate(page_params[:number], page_params[:size]) : resource_store.all
-      render json: @resources, include: includes
-    end
+    # def index
+    #   @resources = should_paginate? ? resource_store.paginate(page_params[:number], page_params[:size]) : resource_store.all
+    #   render json: @resources, include: includes
+    # end
 
+    def index
+      operation
+      # run operation do |result|
+      #   if result[:model].is_a? Enumerable
+      #     return render json: result[:model],
+      #                   each_serializer: serializer,
+      #                   root: nil,
+      #                   status: :created
+      #   else
+      #     return render json: result[:model],
+      #                   serializer: serializer,
+      #                   root: nil,
+      #                   status: :created
+      #   end
+      # end
+    end
     # def show
     #   render json: @resource, include: includes
     # end
@@ -149,6 +165,22 @@ module ApiGuardian
         fail ApiGuardian::Errors::ResourceClassMissing, 'Could not find a resource class (model) ' \
              "for #{resource_name}. Have you created one?"
       end
+    end
+
+    def find_operation_calss
+
+    end
+
+    def operation
+      p "Controller: #{controller_name}"
+      
+      # action = params[:action]
+      # kclass = self.class.name.gsub(/Controller/, "::Operation::#{action.camelize}")
+      # self.logger.debug "operation1: #{kclass}"
+      # kclass = kclass.safe_constantize
+  
+      # self.logger.debug "operation2: #{kclass}"
+      # kclass
     end
   end
 end
