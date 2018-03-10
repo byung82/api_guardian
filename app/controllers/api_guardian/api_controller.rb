@@ -17,10 +17,10 @@ module ApiGuardian
 
     attr_reader :current_user
 
-    # def index
-    #   @resources = should_paginate? ? resource_store.paginate(page_params[:number], page_params[:size]) : resource_store.all
-    #   render json: @resources, include: includes
-    # end
+    def index
+      @resources = should_paginate? ? resource_store.paginate(page_params[:number], page_params[:size]) : resource_store.all
+      render json: @resources, include: includes
+    end
 
     # def show
     #   render json: @resource, include: includes
